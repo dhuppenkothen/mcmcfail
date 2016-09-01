@@ -12,12 +12,13 @@
 % This helps with figure placement
 \renewcommand{\topfraction}{0.85}
 \renewcommand{\textfraction}{0.1}
-\parindent=0cm
 
 % Set values so you can have a title
 \title{New Paper}
 \author{Me}
 \date{\today}
+
+
 
 % Document starts here
 \begin{document}
@@ -27,8 +28,12 @@
 
 %\abstract{This is the abstract}
 
+% Need this after the abstract
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{8pt}
+
 \section{Truncated Exponential Example}
-This example is inspired by David MacKay.
+This example is inspired by Steve Gull, via David MacKay.
 Suppose an astronomical transient
 occurs at time $t=0$, and has a brightness that
 decays exponentially over time:
@@ -42,6 +47,38 @@ Ae^{-\frac{t}{L}}, & t \geq 0\\
 \end{array}
 \right.
 \end{align}
+
+Suppose we observe the object between times $t=t_{\rm min}$ and
+$t=t_{\rm max}$, and we want to know the value of $L$, but don't
+particularly care about $A$. We observe $N$ photons, and their
+arrival times $\{t_1, t_2, ..., t_N\}$.
+The probability distribution for the arrival times
+$\{t_i\}$
+given $L$ (and $N$, which we consider to be prior information)
+is
+\begin{align}
+p(t_1, t_2, ..., t_N | L)
+&\propto \prod_{i=1}^N e^{-t_i/L}.
+\end{align}
+This is the probability distribution for the data given the
+parameters, which will give us the likelihood function once
+we plug in the observed data. However, we need to normalise
+it first, as the observed photon arrival times must be between
+$t_{\rm min}$ and $t_{\rm max}$:
+\begin{align}
+p(t_1, t_2, ..., t_N | L)
+&= \prod_{i=1}^N
+\frac{e^{-t_i/L}}
+     {\int_{t_{\rm min}}^{t_{\rm max}} e^{-t_i/L} dt_i}\\
+&= \prod_{i=1}^N
+\frac{e^{-t_i/L}}
+     {L\left[e^{-t_{\rm min}/L} - e^{-t_{\rm max}/L}\right]}\\
+&= L^{-N}\left[e^{-t_{\rm min}/L} - e^{-t_{\rm max}/L}\right]^{-N}
+e^{-\frac{\sum_{i=1}^N t_i}{L}}.
+\end{align}
+
+
+
 
 
 
