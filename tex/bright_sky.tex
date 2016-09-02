@@ -40,6 +40,10 @@ we'd observe the `true' image, defined by the flux $f$ in each pixel:
 \begin{align}
 \textnormal{true image} &= \left\{f_{ij}\right\}
 \end{align}
+The true total flux of the patch of sky is
+\begin{align}
+F &= \sum_{i=1}^N \sum_{i=1}^N f_{ij}.
+\end{align}
 
 However, due to noise, we observe a perturbed version of the
 flux in each pixel. i.e. our data is noisy fluxes $D_{ij}$,
@@ -59,6 +63,14 @@ p\left(\{D_{ij}\} | \{f_{ij}\}\right)
 \right].
 \end{align}
 
+With this likelihood, we can infer the $f$s
+(the de-noised image) from the $D$s (the noisy data).
+We know fluxes are non-negative, so $f_{ij} \geq 0$.
+
+With an implicit uniform prior on the $f$s,
+try MCMC sampling and using the chain of $f$s to
+get a posterior for $F$. You should notice something
+``wrong'' with it, caused by the uniform prior.
 
 
 
