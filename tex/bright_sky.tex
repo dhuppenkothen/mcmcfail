@@ -1,0 +1,70 @@
+% Every Latex document starts with a documentclass command
+\documentclass[a4paper, 11pt]{article}
+
+% Load some packages
+\usepackage{graphicx} % This allows you to put figures in
+\usepackage{natbib}   % This allows for relatively pain-free reference lists
+\usepackage[left=3cm,top=3cm,right=3cm]{geometry} % The way I like the margins
+\usepackage{dsfont}
+\usepackage{amsmath}
+
+
+% This helps with figure placement
+\renewcommand{\topfraction}{0.85}
+\renewcommand{\textfraction}{0.1}
+
+% Set values so you can have a title
+\title{New Paper}
+\author{Me}
+\date{\today}
+
+
+
+% Document starts here
+\begin{document}
+
+%% Actually put the title in
+%\maketitle
+
+%\abstract{This is the abstract}
+
+% Need this after the abstract
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{8pt}
+
+\section{Bright Sky Example}
+This problem actually gave me headaches during my PhD until
+I thought harder about priors and realised why it was happening.
+Consider an $N \times N$ image of a patch of sky. Without any noise,
+we'd observe the `true' image, defined by the flux $f$ in each pixel:
+\begin{align}
+\textnormal{true image} &= \left\{f_{ij}\right\}
+\end{align}
+
+However, due to noise, we observe a perturbed version of the
+flux in each pixel. i.e. our data is noisy fluxes $D_{ij}$,
+such that
+\begin{align}
+p(D_{ij} | f_{ij}) &\sim \textnormal{Normal}\left(f_{ij}, \sigma^2\right)
+\end{align}
+Assuming $\sigma$ is known, the likelihood
+we'd need to infer the $f$s from the $D$s
+is therefore
+\begin{align}
+p\left(\{D_{ij}\} | \{f_{ij}\}\right)
+&\propto \exp
+\left[
+  -\frac{1}{2\sigma^2}\sum_{i=1}^N\sum_{j=1}^N
+                  \left(D_{ij} - f_{ij}\right)^2
+\right].
+\end{align}
+
+
+
+
+\bibliographystyle{plainnat}
+\bibliography{references}{}
+
+
+\end{document}
+
